@@ -26,7 +26,7 @@ auto bench(alias fun, string units = "msecs",
   }
   double ave = mean(times);
   double sd = 0;
-  /* Will only run summary stats if n > 5 */
+  /* Will only calculate standard deviation n > minN */
   if(n >= minN)
   {
     for(ulong i = 0; i < n; ++i)
