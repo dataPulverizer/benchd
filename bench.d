@@ -2,7 +2,6 @@ import std.stdio: writeln;
 import std.typecons: Tuple, tuple;
 import std.algorithm.iteration: mean;
 import std.datetime.stopwatch: AutoStart, StopWatch;
-import std.random : Mt19937_64, unpredictableSeed, uniform01;
 
 /*
   Simple function for doing benchmarking
@@ -47,6 +46,7 @@ auto bench(alias fun, string units = "msecs",
 /* Example function to benchmarked */
 void MyFun(T = double, ulong n = 100)()
 {
+  import std.random : Mt19937_64, unpredictableSeed, uniform01;
   Mt19937_64 gen;
   gen.seed(unpredictableSeed);
   auto arr = new T[n];
