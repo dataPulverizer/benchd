@@ -11,8 +11,8 @@ import std.datetime.stopwatch: AutoStart, StopWatch;
         before the standard deviation is calculated.
   bool doPrint whether the results should be printed or not
 */
-auto bench(alias fun, string units = "msecs", 
-          ulong minN = 10, bool doPrint = false)(ulong n)
+auto bench(alias fun, string units = "msecs",
+          ulong minN = 10, bool doPrint = false)(ulong n, string msg = "")
 {
   auto times = new double[n];
   auto sw = StopWatch(AutoStart.no);
@@ -26,7 +26,7 @@ auto bench(alias fun, string units = "msecs",
   }
   double ave = mean(times);
   double sd = 0;
-  /* Will only calculate standard deviation n > minN */
+
   if(n >= minN)
   {
     for(ulong i = 0; i < n; ++i)
@@ -38,8 +38,8 @@ auto bench(alias fun, string units = "msecs",
   }
 
   static if(doPrint)
-    writeln("Mean time("~ units ~ "): ", ave, ", Standard Deviation: ", sd);
-  
+    writeln(msg ~ "Mean time("~ units ~ "): ", ave, ", Standard Deviation: ", sd);
+
   return tuple!("mean", "sd")(ave, sd);
 }
 
